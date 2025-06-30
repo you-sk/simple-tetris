@@ -8,7 +8,7 @@ nextContext.scale(20, 20);
 
 let highScore = localStorage.getItem('highscore') || 0;
 
-function arenaSweep() {
+export function arenaSweep() {
     const clearedRows = [];
     outer: for (let y = arena.length - 1; y > 0; --y) {
         for (let x = 0; x < arena[y].length; ++x) {
@@ -41,7 +41,7 @@ function arenaSweep() {
     }
 }
 
-function collide(arena, player) {
+export function collide(arena, player) {
     const m = player.matrix;
     const o = player.pos;
     for (let y = 0; y < m.length; ++y) {
@@ -56,7 +56,7 @@ function collide(arena, player) {
     return false;
 }
 
-function createMatrix(w, h) {
+export function createMatrix(w, h) {
     const matrix = [];
     while (h--) {
         matrix.push(new Array(w).fill(0));
@@ -64,7 +64,7 @@ function createMatrix(w, h) {
     return matrix;
 }
 
-function createPiece(type) {
+export function createPiece(type) {
     if (type === 'I') {
         return [
             [0, 1, 0, 0],
@@ -110,7 +110,7 @@ function createPiece(type) {
     }
 }
 
-function drawMatrix(matrix, offset, targetContext, ghost = false) {
+export function drawMatrix(matrix, offset, targetContext, ghost = false) {
     matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
@@ -127,7 +127,7 @@ function drawMatrix(matrix, offset, targetContext, ghost = false) {
     });
 }
 
-function draw() {
+export function draw() {
     context.fillStyle = '#000';
     context.fillRect(0, 0, canvas.width, canvas.height);
     nextContext.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
@@ -153,7 +153,7 @@ function draw() {
     }, nextContext);
 }
 
-function merge(arena, player) {
+export function merge(arena, player) {
     player.matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
@@ -163,7 +163,7 @@ function merge(arena, player) {
     });
 }
 
-function rotate(matrix, dir) {
+export function rotate(matrix, dir) {
     for (let y = 0; y < matrix.length; ++y) {
         for (let x = 0; x < y; ++x) {
             [
@@ -183,7 +183,7 @@ function rotate(matrix, dir) {
     }
 }
 
-function playerDrop() {
+export function playerDrop() {
     player.pos.y++;
     if (collide(arena, player)) {
         player.pos.y--;
@@ -195,7 +195,7 @@ function playerDrop() {
     dropCounter = 0;
 }
 
-function playerHardDrop() {
+export function playerHardDrop() {
     while (!collide(arena, player)) {
         player.pos.y++;
     }
@@ -207,14 +207,14 @@ function playerHardDrop() {
     dropCounter = 0;
 }
 
-function playerMove(offset) {
+export function playerMove(offset) {
     player.pos.x += offset;
     if (collide(arena, player)) {
         player.pos.x -= offset;
     }
 }
 
-function playerReset() {
+export function playerReset() {
     const pieces = 'TJLOSZI';
     if (!player.nextMatrix) {
         player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
@@ -236,7 +236,7 @@ function playerReset() {
     }
 }
 
-function playerRotate(dir) {
+export function playerRotate(dir) {
     const pos = player.pos.x;
     let offset = 1;
     rotate(player.matrix, dir);
@@ -264,14 +264,14 @@ const startButton = document.getElementById('start-button');
 const retryButton = document.getElementById('retry-button');
 const finalScoreSpan = document.getElementById('final-score');
 
-function showTitleScreen() {
+export function showTitleScreen() {
     titleScreen.style.display = 'block';
     gameOverScreen.style.display = 'none';
     gameContainer.style.display = 'none';
     gameActive = false;
 }
 
-function showGameOverScreen() {
+export function showGameOverScreen() {
     titleScreen.style.display = 'none';
     gameOverScreen.style.display = 'block';
     gameContainer.style.display = 'none';
@@ -279,7 +279,7 @@ function showGameOverScreen() {
     gameActive = false;
 }
 
-function startGame() {
+export function startGame() {
     titleScreen.style.display = 'none';
     gameOverScreen.style.display = 'none';
     gameContainer.style.display = 'block';
@@ -291,7 +291,7 @@ function startGame() {
     update();
 }
 
-function update(time = 0) {
+export function update(time = 0) {
     if (!gameActive) return;
 
     const deltaTime = time - lastTime;
@@ -307,7 +307,7 @@ function update(time = 0) {
     requestAnimationFrame(update);
 }
 
-function updateScore() {
+export function updateScore() {
     document.getElementById('score').innerText = 'Score: ' + player.score;
     document.getElementById('highscore').innerText = highScore;
 }

@@ -1,0 +1,17 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "## 実行方法",
+  "type": "module",
+  "main": "tetris.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.0.3",
+    "jest-environment-jsdom": "^30.0.2"
+  }
+}
