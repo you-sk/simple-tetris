@@ -1,6 +1,10 @@
 # Tetris
 クラシックなテトリスゲームです。落ちてくるテトリミノを操作して、横一列にブロックを揃えるとラインが消え、スコアを獲得できます。
 
+<img width="557" height="738" alt="image" src="https://github.com/user-attachments/assets/218bb4d3-551f-4200-a538-4ce32e3ee16c" />
+
+https://you-sk.github.io/simple-tetris/
+
 ### 操作方法
 
 - **左右矢印キー**: テトリミノを左右に移動
